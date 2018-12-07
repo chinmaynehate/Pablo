@@ -3,6 +3,17 @@ import math
 import constants as c
 import UARTModule as uart
 
+
+LEG_A = 0
+LEG_B = 1
+LEG_C = 2
+LEG_D = 3
+
+LEG_SERVO_TOP = 0
+LEG_SERVO_MIDDLE = 1
+LEG_SERVO_BOTTOM = 2
+
+
 #   DH Params
 
 '''Link Lengths'''
@@ -15,20 +26,27 @@ r1 = c.l01
 r2 = l2
 r3 = l3
 
+def init():
+    uart.initUART()
 
-def goToXY(x,y,z ,legIndex):
+
+
+def goToXYZ(x,y,z ,legIndex):
     t1,t2,t3 = getInverse(x,y,z)
-    uart.writeAngle(legIndex,0,t1)
-    uart.writeAngle(legIndex,1,t2)
-    uart.writeAngle(legIndex,2,t3)
+    if (c.IS_SERIAL_PLUGGED_IN):
+        uart.writeAngle(legIndex,0,t1)
+        uart.writeAngle(legIndex,1,t2)
+        uart.writeAngle(legIndex,2,t3)
 
 def gotoAngle(t1,t2,t3,legIndex):
-    uart.writeAngle(legIndex,0,t1)
-    uart.writeAngle(legIndex,1,t2)
-    uart.writeAngle(legIndex,2,t3)
+    if (c.IS_SERIAL_PLUGGED_IN):
+        uart.writeAngle(legIndex,0,t1)
+        uart.writeAngle(legIndex,1,t2)
+        uart.writeAngle(legIndex,2,t3)
 
 def setAngle(angle,legIndex,servoIndex):
-    uart.writeAngle(legIndex,servoIndex,angle)
+    if (c.IS_SERIAL_PLUGGED_IN):
+        uart.writeAngle(legIndex,servoIndex,angle)
 
 
 

@@ -1,6 +1,8 @@
-SER_PORT = "/dev/ttyUSB0"
+SER_PORT = "/dev/ttyUSB2"
 SER_BAUD=115200
 
+
+IS_SERIAL_PLUGGED_IN = True
 
 #Spider Leg Params
 
@@ -12,4 +14,4 @@ l3=7.7
 
 #Debug Messages
 ENABLE_UART_MESSAGES = True
-ENABLE_ARM_MESSAGES = True
+ENABLE_ARM_MESSAGES = False

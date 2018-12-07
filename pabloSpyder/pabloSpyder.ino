@@ -33,14 +33,14 @@ void goToMotionBeginPosition()
   myservo[2].write(100);    //increase(add an angle) to expand the leg  +
 
   myservo[3].write(180);    //increase(add an angle) to take the leg back  -
-  myservo[4].write(91);       //decrease(subtract an angle) to take the leg down  +
+  myservo[4].write(75);       //decrease(subtract an angle) to take the leg down  +
   myservo[5].write(80);   //decrease(subtract an angle) to expand the leg   -
 
   myservo[6].write(15);    ///inrease(add an angle) to take the leg back    -
   myservo[7].write(54);    ///increase(add an angle) to take the leg down   -
-  myservo[8].write(100);   //increase(add an angle) to expand the leg       +
+  myservo[8].write(105);   //increase(add an angle) to expand the leg       +
 
-  myservo[9].write(155);   //decrease(subtract an angle) to take the leg back   +
+  myservo[9].write(170);   //decrease(subtract an angle) to take the leg back   +
   myservo[10].write(85);   //decrease(subtract an angle) to take the leg down   +
   myservo[11].write(70);  //decrease(subtract an angle to expand the leg    -
 }
@@ -126,7 +126,7 @@ void attachServos()
   
 ///////////////////////////////////////////////  
   ////DDDDDDDDDDDDDDDDDDDDDD////          BACK LEFT
-  myservo[9].attach(G0);//    TOP
+  myservo[9].attach(G0);//    TOP   
   myservo[10].attach(D0);//   MIDDLE
   myservo[11].attach(D1);//   BOTTOM
 //////////////////////////////////////////////

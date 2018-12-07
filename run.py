@@ -1,4 +1,14 @@
 import pablo as arm
+import UARTModule as uart
+
+
+
+def command2():
+    uart.initUART()
+    while True:
+        c = int(input("Enter Command"))
+        uart.writeAngle( (c/10)%10 , c%10 ,c/100  )
+
 
 
 if __name__=="__main__":
@@ -6,12 +16,7 @@ if __name__=="__main__":
     # y=float(input("Enter Target Y:"))
     # z=float(input("Enter Target Z:"))
 
-    x=1
-    y=1
-    z=1
-    writeLegIndex = 0
+    
+    command2()
 
-    t1,t2,t3 = arm.getInverse(x,y,z)
-    input("Press Any Key to Write")
-    arm.goToXY(x,y,z,writeLegIndex)
 
