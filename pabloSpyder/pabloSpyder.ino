@@ -28,19 +28,19 @@ void loop()
 
 void goToMotionBeginPosition()
 {
-  myservo[0].write(5);   //decrease(subtract an angle) to take the leg back +
+  myservo[0].write(70);   //decrease(subtract an angle) to take the leg back +
   myservo[1].write(90);     //increase(add an angle) to take the leg down   -
   myservo[2].write(100);    //increase(add an angle) to expand the leg  +
 
-  myservo[3].write(180);    //increase(add an angle) to take the leg back  -
+  myservo[3].write(125);    //increase(add an angle) to take the leg back  -
   myservo[4].write(75);       //decrease(subtract an angle) to take the leg down  +
   myservo[5].write(80);   //decrease(subtract an angle) to expand the leg   -
 
-  myservo[6].write(15);    ///inrease(add an angle) to take the leg back    -
+  myservo[6].write(46);    ///inrease(add an angle) to take the leg back    -
   myservo[7].write(54);    ///increase(add an angle) to take the leg down   -
   myservo[8].write(105);   //increase(add an angle) to expand the leg       +
 
-  myservo[9].write(170);   //decrease(subtract an angle) to take the leg back   +
+  myservo[9].write(96);   //decrease(subtract an angle) to take the leg back   +
   myservo[10].write(85);   //decrease(subtract an angle) to take the leg down   +
   myservo[11].write(70);  //decrease(subtract an angle to expand the leg    -
 }
@@ -88,8 +88,8 @@ void readIncommingData()
   delay(5);
 
 }
-
-int servoFixedPoints[12] = {5,90,100,180,91,80,15,54,100,155,85,70};
+int servoFixedPoints[12] = {70, 90, 100, 125, 75, 80,   46 ,   54, 105, 96, 85,70} ;
+//int servoFixedPoints[12] = {5,90,100,180,91,80,15,54,100,155,85,70};
 
 void writeServoAngle(int angle,int index)
 {

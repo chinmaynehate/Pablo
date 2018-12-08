@@ -1,4 +1,4 @@
-SER_PORT = "/dev/ttyUSB2"
+SER_PORT = "/dev/ttyUSB1"
 SER_BAUD=115200
 
 

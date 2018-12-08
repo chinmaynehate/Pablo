@@ -20,6 +20,11 @@ def writeAngle( legIndex ,servoIndex , Angle ):
         print("UART: Writing '",message,"'")
     ser.write(message.encode())
 
+def writeCommand(message):
+    message = str(message)   # @@@&* <- Message Syntax
+    if(c.ENABLE_UART_MESSAGES):
+        print("UART: Writing '",message,"'")
+    ser.write(message.encode())
 
 if __name__=="__main__":
     pass
