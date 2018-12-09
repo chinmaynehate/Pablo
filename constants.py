@@ -1,15 +1,16 @@
-SER_PORT = "/dev/ttyUSB1"
+
+
+# Serial PORT 
+IS_SERIAL_PLUGGED_IN = False
+SER_PORT = "/dev/ttyUSB3"
 SER_BAUD=115200
-
-
-IS_SERIAL_PLUGGED_IN = True
 
 #Spider Leg Params
 
 l1=4.56
-l01=0.5
-l2=4.6
-l3=7.7
+l01=0.6
+l2=4.575
+l3=9
 
 
 #Debug Messages

@@ -11,6 +11,9 @@ def initUART():
     ser.port=SER_PORT
     ser.open()
 
+if c.IS_SERIAL_PLUGGED_IN:
+    initUART()
+
 
 #    '@@@' <- Servo Angle , '&' <- legIndex ,'*'<-servoIndex
 def writeAngle( legIndex ,servoIndex , Angle ): 
