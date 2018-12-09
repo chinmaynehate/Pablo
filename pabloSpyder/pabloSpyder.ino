@@ -1,3 +1,5 @@
+#include <LiquidCrystal.h>
+
 #include <megaPinDefs.h>
 
 #include <Servo.h>
