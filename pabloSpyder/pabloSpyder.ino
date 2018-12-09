@@ -1,5 +1,3 @@
-#include <LiquidCrystal.h>
-
 #include <megaPinDefs.h>
 
 #include <Servo.h>
@@ -39,12 +37,12 @@ void goToMotionBeginPosition()
   myservo[5].write(80);   //decrease(subtract an angle) to expand the leg   -
 
   myservo[6].write(46);    ///inrease(add an angle) to take the leg back    -
-  myservo[7].write(54);    ///increase(add an angle) to take the leg down   -
-  myservo[8].write(105);   //increase(add an angle) to expand the leg       +
+  myservo[7].write(105);    ///increase(add an angle) to take the leg down   -
+  myservo[8].write(115);   //increase(add an angle) to expand the leg       +
 
-  myservo[9].write(96);   //decrease(subtract an angle) to take the leg back   +
-  myservo[10].write(85);   //decrease(subtract an angle) to take the leg down   +
-  myservo[11].write(70);  //decrease(subtract an angle to expand the leg    -
+  myservo[9].write(96);   //decrease(subtract an angle) to take the leg back   +  
+  myservo[10].write(70);   //decrease(subtract an angle) to take the leg down   +    ///now leg D servo 3
+  myservo[11].write(100);  //decrease(subtract an angle to expand the leg    - ////now D - servo 2
 }
 
 
@@ -73,7 +71,7 @@ void readIncommingData()
     long int angle = msg;
     
     writeServoAngle(angle,legIndex*3+servoIndex);
-
+  
     LOG("Writing Angle:");
     LOG(angle);
     LOG(",Leg Index:");
@@ -90,7 +88,7 @@ void readIncommingData()
   delay(5);
 
 }
-int servoFixedPoints[12] = {70, 90, 100, 125, 75, 80,   46 ,   54, 105, 96, 85,70} ;
+int servoFixedPoints[12] = {70, 90, 100, 125, 75, 80,   46 ,  100 , 105, 96, 85,70} ;
 //int servoFixedPoints[12] = {5,90,100,180,91,80,15,54,100,155,85,70};
 
 void writeServoAngle(int angle,int index)
@@ -122,8 +120,8 @@ void attachServos()
 
  ////CCCCCCCCCCCCCCCCCCCCCCC/////////        BACK RIGHT
   myservo[6].attach(G3);//   TOP
-  myservo[7].attach(G2);//   MIDDLE
-  myservo[8].attach(G1);//   BOTTOM
+  myservo[7].attach(G1);//   MIDDLE
+  myservo[8].attach(G2);//   BOTTOM
 ////////////////////////////////////////// 
   
 ///////////////////////////////////////////////  
