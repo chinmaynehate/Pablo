@@ -12,25 +12,6 @@ Servo myservo[12];
 
 void setup() 
 {
-DDRA |= 0xFF;
-DDRB |= 0xFF;
-DDRC |= 0xFF;
-DDRD |= 0xFF;
-DDRE |= 0xFF;
-DDRF |= 0xFF;
-DDRG |= 0xFF;
-
-PORTA &= 0x00;
-PORTB &= 0x00;
-PORTC &= 0x00;
-PORTD &= 0x00;
-PORTE &= 0x00;
-PORTF &= 0x00;
-PORTG &= 0x00;
-
-
-
-    
     Serial.begin(115200);
     attachServos();
     goToMotionBeginPosition();
@@ -41,27 +22,27 @@ PORTG &= 0x00;
 void loop() 
 {
 
- //readIncommingData();
+ readIncommingData();
 }
 
 
 void goToMotionBeginPosition()
 {
   myservo[0].write(70);   //decrease(subtract an angle) to take the leg back +
-  myservo[1].write(90);     //increase(add an angle) to take the leg down   -
-  myservo[2].write(110);    //increase(add an angle) to expand the leg  +
+  myservo[1].write(98);     //increase(add an angle) to take the leg down   -
+  myservo[2].write(130);    //increase(add an angle) to expand the leg  +
 
   myservo[3].write(125);    //increase(add an angle) to take the leg back  -
   myservo[4].write(75);       //decrease(subtract an angle) to take the leg down  +
   myservo[5].write(80);   //decrease(subtract an angle) to expand the leg   -
 
-  myservo[6].write(30);    ///inrease(add an angle) to take the leg back    -
-  myservo[7].write(180);    ///increase(add an angle) to take the leg down   -
-  myservo[8].write(180);   //increase(add an angle) to expand the leg       +
+  myservo[6].write(40);    ///inrease(add an angle) to take the leg back    -
+  myservo[7].write(85);    ///increase(add an angle) to take the leg down   -
+  myservo[8].write(78);   //increase(add an angle) to expand the leg       +
 
-  myservo[9].write(90);   //decrease(subtract an angle) to take the leg back   +  
-  myservo[10].write(90);   //decrease(subtract an angle) to take the leg down   +    ///now leg D servo 3
-  myservo[11].write(165);  //decrease(subtract an angle to expand the leg    - ////now D - servo 2
+  myservo[9].write(98);   //decrease(subtract an angle) to take the leg back   +  
+  myservo[10].write(115);   //decrease(subtract an angle) to take the leg down   +    ///now leg D servo 3
+  myservo[11].write(127);  //decrease(subtract an angle to expand the leg    - ////now D - servo 2
 }
 
 
@@ -107,7 +88,7 @@ void readIncommingData()
   delay(5);
 
 }
-int servoFixedPoints[12] = {70, 90, 100, 125, 75, 80,   46 ,  100 , 100, 96, 110,68} ;
+int servoFixedPoints[12] = {70, 98, 130, 125, 75, 80,   40 ,  110 , 78, 98, 115,127} ;
 //int servoFixedPoints[12] = {5,90,100,180,91,80,15,54,100,155,85,70};
 
 void writeServoAngle(int angle,int index)

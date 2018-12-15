@@ -6,10 +6,10 @@
 
 // CONSTANTS
 #define  pi  3.141592653589793;
-#define SHIFT_ALL_STEP_SIZE 0.2
-#define SHIFT_ALL_STEP_DELAY 100
-#define STEP_IN_Y_DELAY 800
-#define STEP_IN_Y_HEIGHT -10
+#define SHIFT_ALL_STEP_SIZE 0.3
+#define SHIFT_ALL_STEP_DELAY 30
+#define STEP_IN_Y_DELAY 300
+#define STEP_IN_Y_HEIGHT -9.5
 
 
 const float X = 4;
@@ -19,7 +19,7 @@ const float Z = -13;
 float l1 = 4.56;
 float l01=0.6;
 float l2=4.575;
-float l3=9;
+float l3=8.4;
 
 // Inverse Params
 float r1 = l01;
@@ -191,8 +191,9 @@ void getInverse(float x,float y,float z)
 }
 
 
-int servoFixedPoints[12] = {70, 90, 100, 125, 75, 80,  46 ,  105, 115, 96, 70,100} ;
-
+//int servoFixedPoints[12] = {70, 90, 100, 125, 75, 80,  46 ,  105, 115, 96, 70,100} ;
+//int servoFixedPoints[12] = {70, 90, 100, 125, 75, 80,   46 ,  100 , 100, 96, 110,68} ;
+int servoFixedPoints[12] = {70, 98, 130, 125, 75, 80,   40 ,  110 , 78, 98, 115,127} ;
 void writeServoAngle(int angle,int index)
 {
     if(index == 0 || index==2 ||index==4 ||index==8 ||index==9 ||index==10)
@@ -206,8 +207,13 @@ void writeServoAngle(int angle,int index)
    
 }
 
+void setAngle(int angle,int legIndex,int servoIndex)
+{
+    writeServoAngle(angle,legIndex*3+servoIndex);
+}
 
-void attachServos()
+
+/*void attachServos()
 {
   /////AAAAAAAAAAAAAAAAAAAA//////////////      FRONT LEFT
   myservo[0].attach(D2);//  TOP
@@ -232,6 +238,34 @@ void attachServos()
   myservo[10].attach(D0);//   MIDDLE
   myservo[11].attach(D1);//   BOTTOM
     //  ////////////////////////////////////////////
+}*/
+
+
+void attachServos()
+{
+  /////AAAAAAAAAAAAAAAAAAAA//////////////      FRONT LEFT
+  myservo[0].attach(D4);//  TOP
+  myservo[1].attach(D6);//  MIDDLE
+  myservo[2].attach(D7);//  BOTTOM
+
+  ////BBBBBBBBBBBBBBBBBBBBB///////            FRONT RIGHT
+  myservo[3].attach(D2);//   TOP
+  myservo[4].attach(B4);//   MIDDLE
+  myservo[5].attach(D0);//   BOTTOM
+ ////////////////////////////////////////// 
+
+ ////CCCCCCCCCCCCCCCCCCCCCCC/////////        BACK RIGHT
+  myservo[6].attach(C2);//   TOP
+  myservo[7].attach(B5);//   MIDDLE
+  myservo[8].attach(C0);//   BOTTOM
+////////////////////////////////////////// 
+  
+///////////////////////////////////////////////  
+  ////DDDDDDDDDDDDDDDDDDDDDD////          BACK LEFT
+  myservo[9].attach(E3);//    TOP   
+  myservo[10].attach(E4);//   MIDDLE
+  myservo[11].attach(C7);//   BOTTOM
+//////////////////////////////////////////////
 }
 
 void setup()
@@ -246,6 +280,143 @@ void setup()
 void loop()
 {
 //  Serial.println("Looping");
-   walk(); 
+//   walk(); 
+     //turn();
+     turn_left();
+//go2StablePosition();
+//walk();
+}
+
+
+const int stableTopAngle = 30;
+void go2StablePosition(void)
+{
+    // Leg A 
+    setAngle(stableTopAngle,0,0);
+    setAngle(0,0,1);
+    setAngle(0,0,2);
+
+    // Leg B 
+    setAngle(stableTopAngle,1,0);
+    setAngle(0,1,1);
+    setAngle(0,1,2);
+
+    // Leg C 
+    setAngle(-stableTopAngle,2,0);
+    setAngle(20,2,1);
+    setAngle(0,2,2);
+
+    // Leg D 
+    setAngle(-stableTopAngle,3,0);
+    setAngle(0,3,1);
+    setAngle(0,3,2);
+}
+
+
+const int legPickupAngle = 70;
+const int turningAngle = 40;
+const int pickupDelay = 100;
+void turn_right()
+{
+    // Turn Left
+    // Pickup Leg A and Rotate
+    setAngle(legPickupAngle,0,1);                   //pickup using 2nd Servo
+    delay(pickupDelay);
+    setAngle(stableTopAngle + turningAngle,0,0);    //Rotate Top 
+    delay(pickupDelay);
+    setAngle(0,0,1);                                //Drop off the 2nd Servo of the Corresponding Leg
+    delay(pickupDelay);
+
+    // Pickup Leg C and Rotate
+    setAngle(legPickupAngle,2,1);                   //pickup using 2nd Servo
+    delay(pickupDelay);
+    setAngle(-stableTopAngle - turningAngle,2,0);    //Rotate Top 
+    delay(pickupDelay);
+    setAngle(0,2,1);                                //Drop off the 2nd Servo of the Corresponding Leg
+    delay(pickupDelay);
+
+    // Pickup Leg B and Rotate
+    setAngle(legPickupAngle,1,1);                   //pickup using 2nd Servo
+    delay(pickupDelay);
+    setAngle(stableTopAngle - turningAngle,1,0);    //Rotate Top 
+    delay(pickupDelay);
+    setAngle(0,1,1);                                //Drop off the 2nd Servo of the Corresponding Leg
+    delay(pickupDelay);
+    
+
+    // Pickup Leg D and Rotate
+    setAngle(legPickupAngle,3,1);                   //pickup using 2nd Servo
+    delay(pickupDelay);
+    setAngle(-stableTopAngle + turningAngle,3,0);    //Rotate Top 
+    delay(pickupDelay);
+    setAngle(0,3,1);                                //Drop off the 2nd Servo of the Corresponding Leg
+    delay(pickupDelay);
+    
+
+    // Rotate All Back to Normal Position
+    setAngle(stableTopAngle,0,0);
+    setAngle(stableTopAngle,1,0);
+    setAngle(-stableTopAngle,2,0);
+    setAngle(-stableTopAngle,3,0);
+    delay(pickupDelay+300);
+
+//    go2StablePos/ition();                   
+
+}
+
+
+
+
+
+
+
+void turn_left()
+{
+    // Turn Left
+    // Pickup Leg A and Rotate
+    setAngle(legPickupAngle,0,1);                   //pickup using 2nd Servo
+    delay(pickupDelay);
+    setAngle(stableTopAngle - turningAngle+30,0,0);    //Rotate Top 
+    delay(pickupDelay);
+    setAngle(0,0,1);                                //Drop off the 2nd Servo of the Corresponding Leg
+    delay(pickupDelay);
+
+    // Pickup Leg B and Rotate
+    setAngle(legPickupAngle,1,1);                   //pickup using 2nd Servo
+    delay(pickupDelay);
+    setAngle(stableTopAngle + turningAngle,1,0);    //Rotate Top 
+    delay(pickupDelay);
+    setAngle(0,1,1);                                //Drop off the 2nd Servo of the Corresponding Leg
+    delay(pickupDelay);
+    
+    // Pickup Leg D and Rotate
+    setAngle(legPickupAngle,3,1);                   //pickup using 2nd Servo
+    delay(pickupDelay);
+    setAngle(-stableTopAngle - turningAngle,3,0);    //Rotate Top 
+    delay(pickupDelay);
+    setAngle(0,3,1);                                //Drop off the 2nd Servo of the Corresponding Leg
+    delay(pickupDelay);
+    
+    // Pickup Leg C and Rotate
+    setAngle(legPickupAngle,2,1);                   //pickup using 2nd Servo
+    delay(pickupDelay);
+    setAngle(-stableTopAngle + turningAngle,2,0);    //Rotate Top 
+    delay(pickupDelay);
+    setAngle(0,2,1);                                //Drop off the 2nd Servo of the Corresponding Leg
+    delay(pickupDelay);
+
+    
+   
+    
+    
+
+    // Rotate All Back to Normal Position
+    setAngle(stableTopAngle,0,0);
+    setAngle(stableTopAngle,1,0);
+    setAngle(-stableTopAngle,2,0);
+    setAngle(-stableTopAngle,3,0);
+    delay(pickupDelay+200);
+
+//    go2StablePos/ition();                   
 
 }
