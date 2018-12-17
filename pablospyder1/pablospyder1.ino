@@ -88,7 +88,7 @@ void readIncommingData()
   delay(5);
 
 }
-int servoFixedPoints[12] = {70, 98, 130, 125, 75, 80,   40 ,  110 , 78, 98, 115,127} ;
+int servoFixedPoints[12] = {70, 98, 130, 125, 75, 80,   40 ,  85 , 78, 98, 115,127} ;
 //int servoFixedPoints[12] = {5,90,100,180,91,80,15,54,100,155,85,70};
 
 void writeServoAngle(int angle,int index)

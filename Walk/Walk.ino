@@ -193,7 +193,8 @@ void getInverse(float x,float y,float z)
 
 //int servoFixedPoints[12] = {70, 90, 100, 125, 75, 80,  46 ,  105, 115, 96, 70,100} ;
 //int servoFixedPoints[12] = {70, 90, 100, 125, 75, 80,   46 ,  100 , 100, 96, 110,68} ;
-int servoFixedPoints[12] = {70, 98, 130, 125, 75, 80,   40 ,  110 , 78, 98, 115,127} ;
+//int servoFixedPoints[12] = {70, 98, 130, 125, 75, 80,   40 ,  110 , 78, 98, 115,127} ;
+int servoFixedPoints[12] = {70, 98, 130, 125, 75, 80,   40 ,  85 , 78, 98, 115,127} ;
 void writeServoAngle(int angle,int index)
 {
     if(index == 0 || index==2 ||index==4 ||index==8 ||index==9 ||index==10)
@@ -280,9 +281,9 @@ void setup()
 void loop()
 {
 //  Serial.println("Looping");
-//   walk(); 
+//  walk(); 
      //turn();
-     turn_left();
+     turn_right();
 //go2StablePosition();
 //walk();
 }
@@ -322,35 +323,47 @@ void turn_right()
     // Pickup Leg A and Rotate
     setAngle(legPickupAngle,0,1);                   //pickup using 2nd Servo
     delay(pickupDelay);
+//    waitForEnter();
     setAngle(stableTopAngle + turningAngle,0,0);    //Rotate Top 
     delay(pickupDelay);
+//    waitForEnter();
     setAngle(0,0,1);                                //Drop off the 2nd Servo of the Corresponding Leg
     delay(pickupDelay);
+    waitForEnter();
 
     // Pickup Leg C and Rotate
     setAngle(legPickupAngle,2,1);                   //pickup using 2nd Servo
     delay(pickupDelay);
+//    waitForEnter();
     setAngle(-stableTopAngle - turningAngle,2,0);    //Rotate Top 
     delay(pickupDelay);
+//    waitForEnter();
     setAngle(0,2,1);                                //Drop off the 2nd Servo of the Corresponding Leg
     delay(pickupDelay);
+    waitForEnter();
 
     // Pickup Leg B and Rotate
     setAngle(legPickupAngle,1,1);                   //pickup using 2nd Servo
     delay(pickupDelay);
+//    waitForEnter();
     setAngle(stableTopAngle - turningAngle,1,0);    //Rotate Top 
     delay(pickupDelay);
+//    waitForEnter();
     setAngle(0,1,1);                                //Drop off the 2nd Servo of the Corresponding Leg
     delay(pickupDelay);
+    waitForEnter();
     
 
     // Pickup Leg D and Rotate
     setAngle(legPickupAngle,3,1);                   //pickup using 2nd Servo
     delay(pickupDelay);
+//    waitForEnter();
     setAngle(-stableTopAngle + turningAngle,3,0);    //Rotate Top 
     delay(pickupDelay);
+//    waitForEnter();
     setAngle(0,3,1);                                //Drop off the 2nd Servo of the Corresponding Leg
     delay(pickupDelay);
+    waitForEnter();
     
 
     // Rotate All Back to Normal Position
@@ -358,7 +371,8 @@ void turn_right()
     setAngle(stableTopAngle,1,0);
     setAngle(-stableTopAngle,2,0);
     setAngle(-stableTopAngle,3,0);
-    delay(pickupDelay+300);
+    delay(pickupDelay+100);
+    waitForEnter();
 
 //    go2StablePos/ition();                   
 
@@ -419,4 +433,24 @@ void turn_left()
 
 //    go2StablePos/ition();                   
 
+}
+
+
+int waitForEnter()
+{
+//  return 0;
+    while(true)
+    {
+        if(Serial.available())
+        {
+          while(Serial.available())
+          {
+            Serial.read();
+          }
+            Serial.println("Input Received !");
+//            delay(100);
+            return 0;
+        }
+    }
+  
 }
