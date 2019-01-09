@@ -176,6 +176,7 @@ void getInverse(float x,float y,float z)
     th03 = atan2f( z-r2*sinf(th02) , x*cosf(th1) + y*sinf(th1) - r2*cosf(th02) -r1 ) -th02 ;
     th13 = atan2f( z-r2*sinf(th12) , x*cosf(th1) + y*sinf(th1) - r2*cosf(th12) -r1 ) -th12 ;
 
+
     th1 *=180/pi;
     th02*=180/pi;
     th12*=180/pi;
